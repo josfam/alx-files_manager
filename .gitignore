@@ -1,2 +1,5 @@
 # node modules
 node_modules/
+
+# main test files
+main*.js
