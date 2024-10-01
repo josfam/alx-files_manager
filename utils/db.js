@@ -7,7 +7,7 @@ class DBClient {
     const database = process.env.DB_DATABASE || 'files_manager';
     const url = `mongodb://${host}:${port}`;
     // create client
-    this.client = new MongoClient(url);
+    this.client = new MongoClient(url, { useUnifiedTopology: true });
     // make the database connection
     this.client.connect()
       .then(() => {
@@ -23,11 +23,11 @@ class DBClient {
   }
 
   async nbUsers() {
-    return this.db.users.countDocuments();
+    return this.db.collection('users').countDocuments();
   }
 
   async nbFiles() {
-    return this.db.files.countDocuments();
+    return this.db.collection('files').countDocuments();
   }
 }
 
