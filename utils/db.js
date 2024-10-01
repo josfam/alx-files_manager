@@ -1,6 +1,9 @@
 import { MongoClient } from 'mongodb';
 
 class DBClient {
+  /**
+   * Creates a mongodb client
+   */
   constructor() {
     const host = process.env.DB_HOST || 'localhost';
     const port = process.env.DB_PORT || 27017;
@@ -18,14 +21,23 @@ class DBClient {
       });
   }
 
+  /**
+   * Returns true when the connection to MongoDB is a success otherwise returns False
+   */
   isAlive() {
     return this.client.isConnected();
   }
 
+  /**
+   * Returns the number of documents in the collection `users`
+   */
   async nbUsers() {
     return this.db.collection('users').countDocuments();
   }
 
+  /**
+   * Returns the number of documents in the collection `files`
+   */
   async nbFiles() {
     return this.db.collection('files').countDocuments();
   }
